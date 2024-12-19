@@ -25,7 +25,7 @@ const Application = () => {
                 alert("Something went wrong. \n " + error.message);
             })
     }, []);
-
+    const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
     const columns = [
         {
             title: '#',
@@ -42,7 +42,7 @@ const Application = () => {
             title: 'Applicant Name',
             dataIndex: 'applicantName',
             key: 'applicantName',
-            sorter: (a, b) => a.applicantName.length - b.applicantName.length,
+            sorter: (a, b) => sorter(a.applicantName, b.applicantName),
             filteredValue: [searchedText],
             onFilter: (value, record) => {
                 return String(record.applicantName).toLowerCase().includes(value.toLowerCase())
@@ -125,3 +125,4 @@ const Application = () => {
 };
 
 export default Application;
+
